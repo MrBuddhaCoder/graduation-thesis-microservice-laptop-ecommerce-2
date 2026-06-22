@@ -5,9 +5,6 @@ A full-stack laptop e-commerce platform built with **Spring Boot 3.5**, **Spring
 ## 📌 Related Repository
 
 **Frontend Application:** [Ecom-Frontend-thesis-project-2025.1](https://github.com/MrBuddhaCoder/Ecom-Frontend-thesis-project-2025.1)
-- Built with React
-- Runs on port 5173 (in development)
-- Communicates with API Gateway at http://localhost:8080
 
 ---
 
