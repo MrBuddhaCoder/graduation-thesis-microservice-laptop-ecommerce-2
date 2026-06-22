@@ -2,6 +2,13 @@
 
 A full-stack laptop e-commerce platform built with **Spring Boot 3.5**, **Spring Cloud 2025**, and **React**, following a microservices architecture pattern. The system supports multi-role users (Customer, Seller, Admin), product catalog with technical specifications, shopping cart, Stripe-powered checkout, and asynchronous email notifications.
 
+## 📌 Related Repository
+
+**Frontend Application:** [Ecom-Frontend-thesis-project-2025.1](https://github.com/MrBuddhaCoder/Ecom-Frontend-thesis-project-2025.1)
+- Built with React
+- Runs on port 5173 (in development)
+- Communicates with API Gateway at http://localhost:8080
+
 ---
 
 ## Request Flow
