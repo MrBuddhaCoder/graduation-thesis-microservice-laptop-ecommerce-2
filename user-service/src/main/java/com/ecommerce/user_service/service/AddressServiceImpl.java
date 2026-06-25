@@ -1,13 +1,11 @@
 package com.ecommerce.user_service.service;
 
-
 import com.ecommerce.user_service.exceptions.APIException;
 import com.ecommerce.user_service.exceptions.ResourceNotFoundException;
 import com.ecommerce.user_service.model.Address;
 import com.ecommerce.user_service.model.User;
 import com.ecommerce.user_service.payload.AddressDTO;
 import com.ecommerce.user_service.repositories.AddressRepository;
-import com.ecommerce.user_service.repositories.UserRepository;
 import com.ecommerce.user_service.util.AuthUtil;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,13 +40,11 @@ public class AddressServiceImpl implements AddressService {
         // Check if address already exists for this user
         List<Address> userAddresses = user.getAddresses();
         boolean addressExists = userAddresses.stream()
-                .anyMatch(a ->
-                        a.getStreet().equalsIgnoreCase(address.getStreet()) &&
-                                a.getBuildingName().equalsIgnoreCase(address.getBuildingName()) &&
-                                a.getCity().equalsIgnoreCase(address.getCity()) &&
-                                a.getState().equalsIgnoreCase(address.getState()) &&
-                                a.getPincode().equalsIgnoreCase(address.getPincode())
-                );
+                .anyMatch(a -> a.getStreet().equalsIgnoreCase(address.getStreet()) &&
+                        a.getBuildingName().equalsIgnoreCase(address.getBuildingName()) &&
+                        a.getCity().equalsIgnoreCase(address.getCity()) &&
+                        a.getState().equalsIgnoreCase(address.getState()) &&
+                        a.getPincode().equalsIgnoreCase(address.getPincode()));
 
         if (addressExists) {
             throw new APIException("Address already exists for this user");
@@ -95,7 +91,7 @@ public class AddressServiceImpl implements AddressService {
         List<Address> addresses = user.getAddresses();
 
         if (addresses.isEmpty()) {
-            return new ArrayList<>();  // Return empty list thay vì throw exception
+            return new ArrayList<>(); // Return empty list thay vì throw exception
         }
 
         // Map list of entities to list of DTOs

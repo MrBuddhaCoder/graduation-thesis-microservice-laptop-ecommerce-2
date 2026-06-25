@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.gateway.filter.GatewayFilterChain;
 import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.core.Ordered;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.HttpCookie;
@@ -32,16 +31,14 @@ import java.util.stream.Collectors;
 @Component
 public class AuthenticationFilter implements GlobalFilter, Ordered {
 
-
-
     private final JwtService jwtService;
     private final GatewaySecurityProperties securityProperties;
     private final String jwtCookieName;
     private final AntPathMatcher pathMatcher = new AntPathMatcher();
 
     public AuthenticationFilter(JwtService jwtService,
-                                GatewaySecurityProperties securityProperties,
-                                @Value("${spring.ecom.app.jwtCookieName:springBootEcom}") String jwtCookieName) {
+            GatewaySecurityProperties securityProperties,
+            @Value("${spring.ecom.app.jwtCookieName:springBootEcom}") String jwtCookieName) {
         this.jwtService = jwtService;
         this.securityProperties = securityProperties;
         this.jwtCookieName = jwtCookieName;
@@ -51,30 +48,30 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
 
-//        1.kiểm tra public path
+        // 1.kiểm tra public path
         if (isPublicRoute(request.getPath().value()) || isPreFlight(request)) {
             return chain.filter(exchange);
         }
-//lấy token từ cookie
+        // lấy token từ cookie
         String token = resolveToken(request);
         if (token == null || token.isBlank()) {
             return unauthorized(exchange, "Missing authentication token");
         }
-//validate token
+        // validate token
         if (!jwtService.isTokenValid(token)) {
             return unauthorized(exchange, "Invalid or expired token");
         }
 
-//      Parse claims và extract roles
+        // Parse claims và extract roles
         Claims claims = jwtService.parseClaims(token);
         List<String> roles = jwtService.extractRoles(claims);
 
-//      Kiểm tra Authorization
+        // Kiểm tra Authorization
         Set<String> requiredRoles = resolveRequiredRoles(request.getPath().value());
         if (!requiredRoles.isEmpty() && roles.stream().noneMatch(requiredRoles::contains)) {
             return forbidden(exchange, "Insufficient permissions");
         }
-//cho phép request đi tiếp
+        // cho phép request đi tiếp
         return chain.filter(exchange);
     }
 
@@ -98,7 +95,7 @@ public class AuthenticationFilter implements GlobalFilter, Ordered {
                 .collect(Collectors.toSet());
     }
 
-//    lấy token từ cookie
+    // lấy token từ cookie
     private String resolveToken(ServerHttpRequest request) {
         HttpCookie jwtCookie = request.getCookies().getFirst(jwtCookieName);
         if (jwtCookie != null && jwtCookie.getValue() != null && !jwtCookie.getValue().isBlank()) {
