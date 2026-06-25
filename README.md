@@ -2,6 +2,10 @@
 
 A full-stack laptop e-commerce platform built with **Spring Boot 3.5**, **Spring Cloud 2025**, and **React**, following a microservices architecture pattern. The system supports multi-role users (Customer, Seller, Admin), product catalog with technical specifications, shopping cart, Stripe-powered checkout, and asynchronous email notifications.
 
+## 📌 Related Repository
+
+**Frontend Application:** [Ecom-Frontend-thesis-project-2025.1](https://github.com/thaivanlam/Ecom-Frontend-thesis-project-2025.1)
+
 ---
 
 ## Request Flow
@@ -323,3 +327,22 @@ docker-compose up --build
 - Redis for session/cache layer
 - Kubernetes deployment manifests
 - Load testing with JMeter (Smoke → Load → Stress → Spike strategy)
+
+## License
+
+This project is licensed under the **GNU Affero General Public License v3.0 (AGPL-3.0)**.
+
+### What This Means
+
+- ✅ **You can**: Use, modify, and distribute this code freely
+- ✅ **You must**: Include a copy of the license and state changes made
+- ✅ **You must**: Disclose the source code if you deploy modified versions as a network service
+- ❌ **You cannot**: Use this code in proprietary/closed-source projects without permission
+
+### Copyright
+
+**Copyright © 2025 Thái Văn Lâm**
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but **WITHOUT ANY WARRANTY**; without even the implied warranty of **MERCHANTABILITY** or **FITNESS FOR A PARTICULAR PURPOSE**. See the [LICENSE](./LICENSE) file for more details.
