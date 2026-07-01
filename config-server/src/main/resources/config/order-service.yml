@@ -16,3 +16,7 @@ server:
 stripe:
   secret:
     key: ${STRIPE_SECRET_KEY}
+
+springdoc:
+  api-docs:
+    enabled: true
